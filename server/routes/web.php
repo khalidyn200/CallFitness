@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/products/top-three', [ProductController::class, 'getTopThreeProducts']);
+
+Route::get('/products', [ProductController::class, 'getAllProducts']);
+
+Route::get('/product/{id}', [ProductController::class, 'getProductById']);
 
 Route::middleware([
     'auth:sanctum',
