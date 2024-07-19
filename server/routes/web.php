@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +37,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/dashboard', [ProductController::class, 'index'])->name('dashboard');
+Route::resource('products', ProductController::class);

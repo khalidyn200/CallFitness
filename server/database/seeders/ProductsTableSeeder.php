@@ -14,7 +14,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('produits')->insert([
+        DB::table('products')->insert([
             [
                 'title' => 'Smartphone',
                 'short_description' => 'Un smartphone avec un écran de haute qualité.',

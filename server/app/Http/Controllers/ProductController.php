@@ -1,31 +1,87 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\Produit;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function getTopThreeProducts()
+    public function index()
+    {        
+        $products = Product::with('category')->get(); 
+        return view('dashboard', compact('products'));
+    }
+    
+    public function create()
     {
-        $products = Produit::orderBy('id', 'asc')->take(3)->get();
-        return response()->json($products);
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
-    public function getAllProducts()
+    public function store(Request $request)
     {
-        $products = Produit::paginate(10);
-        return response()->json($products);
-    }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'short_description' => 'nullable|string',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'pictures' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categorie_id' => 'required|exists:categories,id',
+        ]);
 
-    public function getProductById($id)
-    {
-        $product = Produit::find($id);
-        if ($product) {
-            return response()->json($product);
-        } else {
-            return response()->json(['error' => 'Product not found'], 404);
+        $data = $request->all();
+
+        if ($request->hasFile('pictures')) {
+            $data['pictures'] = $request->file('pictures')->store('images', 'public');
         }
+
+        Product::create($data);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'short_description' => 'nullable|string',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'pictures' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categorie_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $data = $request->all();
+
+        if ($request->hasFile('pictures')) {
+            if ($product->pictures) {
+                Storage::disk('public')->delete($product->pictures);
+            }
+            $data['pictures'] = $request->file('pictures')->store('images', 'public');
+        }
+
+        $product->update($data);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        if ($product->pictures) {
+            Storage::disk('public')->delete($product->pictures);
+        }
+        $product->delete();
+        return redirect()->route('dashboard');
     }
 }
