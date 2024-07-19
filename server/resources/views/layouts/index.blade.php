@@ -7,10 +7,10 @@
             <div class="sliderItem">
                 <img src="{{ $accessory['imageURL'] }}" alt="{{ $accessory['name'] }}" class="sliderImg">
                 <div class="sliderBg"></div>
-                <h1 class="sliderTitle">{{ strtoupper($accessory['name']) }}<br>NEW<br>SEASON</h1>
-                <h2 class="sliderPrice">${{ number_format($accessory['price'], 2) }}</h2>
+                <h1 class="sliderTitle">{{ strtoupper($accessory['name']) }}</h1>
+                <h2 class="sliderPrice">{{ number_format($accessory['price'], 2) }} DH</h2>
                 <a href="#product">
-                    <button class="buyButton">BUY NOW!</button>
+                    <a href="/products/details/{{$accessory['id']}}" class="buyButton">BUY NOW!</a>
                 </a>
             </div>
         @endforeach
@@ -40,9 +40,9 @@
     <img src="{{ $gymAccessories[0]['imageURL'] }}" alt="" class="productImg">
     <div class="productDetails">
         <h5 class="productTitle">{{ $gymAccessories[0]['name'] }}</h5>
-        <h2 class="productPrice">{{ $gymAccessories[0]['price'] }}</h2>
+        <h2 class="productPrice">{{ $gymAccessories[0]['price'] }} DH</h2>
 
-        <button class="productButton">BUY NOW!</button>
+        <a  href="/products/details/{{$accessory['id']}}" class="productButton">BUY NOW!</a>
     </div>
 </div>
 
@@ -77,49 +77,4 @@
       </div>
     </div>
   </section>
-
-
-<!-- Footer -->
-<footer class="bg-gray-100 py-8 w-full" style="width: 100vw; overflow: auto; ">
-    <div class="container mx-auto grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4" style="width: 100vw !important">
-      <!-- About Us -->
-      <div class="space-y-4">
-        <h1 class="text-xl font-bold mb-4">À propos de nous</h1>
-        <p class="text-gray-700" style="word-wrap: break-word;">
-            Découvrez notre passion pour l'innovation et l'excellence. Nous nous engageons à offrir des produits de qualité et un service client irréprochable.     
-        </p>
-      </div>
-      
-      <!-- Products -->
-      <div class="space-y-4">
-        <h1 class="text-xl font-bold mb-4">Products</h1>
-        <ul class="list-disc pl-5 space-y-2">
-            @foreach($gymAccessories as $gymAccessory)
-            <li class="text-gray-700"><a href=""> {{$gymAccessory['name']}} </a></li>
-
-            @endforeach
-        </ul>
-      </div>
-  
-      <!-- Subscribe & Follow Us -->
-      <div class="space-y-8">
-        <div class="space-y-4">
-          <h1 class="text-xl font-bold mb-4">Subscribe to our newsletter</h1>
-          <div class="flex gap-2">
-            <input type="text" placeholder="your@email.com" class="flex-1 border border-gray-300 px-4 py-2 rounded-lg">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Join!</button>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <h1 class="text-xl font-bold mb-4">Follow Us</h1>
-          <div class="flex space-x-4">
-            <img src="./img/facebook.png" alt="Facebook" class="w-8 h-8">
-            <img src="./img/twitter.png" alt="Twitter" class="w-8 h-8">
-            <img src="./img/instagram.png" alt="Instagram" class="w-8 h-8">
-            <img src="./img/whatsapp.png" alt="WhatsApp" class="w-8 h-8">
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>  
 @endsection

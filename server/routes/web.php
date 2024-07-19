@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [TestController::class, 'getGymThreeProducts']);
-Route::get('/products/gym-accessories', [TestController::class, 'getGymAccessories']);
+Route::get('/', [TestController::class, 'getGymThreeProducts'])->name('home');
+Route::get('/products/gym-accessories', [TestController::class, 'getGymAccessories'])->name('products.gym-accessories');
 Route::get('/products/details/{id}', [TestController::class, 'getGymAccessoryDetails']);
 
 Route::get('/products/top-three', [ProductController::class, 'getTopThreeProducts']);
