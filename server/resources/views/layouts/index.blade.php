@@ -36,6 +36,9 @@
     </div>
 </div>
 
+
+
+
 <div class="product" id="product">
     <img src="{{ $gymAccessories[0]['imageURL'] }}" alt="" class="productImg">
     <div class="productDetails">
@@ -45,6 +48,13 @@
         <a  href="/products/details/{{$accessory['id']}}" class="productButton">BUY NOW!</a>
     </div>
 </div>
+
+<div class="relative w-full mt-6 bg-white p-4 rounded-lg shadow-lg overflow-hidden">
+    <img src="img/gymAccess.jpeg" alt="" class="w-full h-auto object-cover rounded-md transition-transform transform hover:scale-105 duration-300">
+</div>
+
+
+
 
 <!-- Gallery -->
 <section class="py-8">

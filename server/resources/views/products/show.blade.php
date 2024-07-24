@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<img src="/img/gymAccess.jpeg" alt="Gym Accessory" class="mx-auto my-12 w-4/5 h-auto">
+
 <main class="main mb-12">
     <!-- Cart Section -->
     <section class="cart container" id="cart">
@@ -62,7 +62,7 @@
                 </div>
              </div>
              <div class="wrapper-action">
-                <button class="btn btn-darken" >Achter</button>
+                <button class="btn btn-darken" >Acheter</button>
              </div>
           </div>
        </div>
